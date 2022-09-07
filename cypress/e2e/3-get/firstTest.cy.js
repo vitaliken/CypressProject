@@ -40,12 +40,35 @@
 
 
 
-it('Using Get with Find and Eq', () => {
-    cy.visit('https://amihome.by/catalog/upholstered/soft_corners/');
-    cy.get('.bottom-header').find('ul').find('li').eq('2');
+// it('Using Get with Find and Eq', () => {
+//     cy.visit('https://amihome.by/catalog/upholstered/soft_corners/');
+//     cy.get('.bottom-header').find('ul').find('li').eq('2');
+// })
+
+// it.only('Using Get with Find and Eq 2', () => {
+//     cy.visit('https://docs.cypress.io/api/table-of-contents');
+//     cy.get('aside').find('div').find('button').eq('4').click();
+// })
+
+
+
+
+it('Using Contains', () => {
+    cy.visit('https://docs.cypress.io/api/table-of-contents');
+    cy.contains('Discord');
 })
 
-it.only('Using Get with Find and Eq 2', () => {
+it('Using Contains', () => {
     cy.visit('https://docs.cypress.io/api/table-of-contents');
-    cy.get('aside').find('div').find('button').eq('4').click();
+    cy.contains('div', 'Discord');
+})
+
+it('Using Contains', () => {
+    cy.visit('https://docs.cypress.io/api/table-of-contents');
+    cy.contains('DISCORD', {matchCase: false}); //register ignore
+})
+
+it.only('Using Contains', () => {
+    cy.visit('https://docs.cypress.io/api/table-of-contents');
+    cy.get('aside').contains('Utilities');
 })
