@@ -45,11 +45,8 @@
 
 
 
-<<<<<<< HEAD
 //15.Поиск элементов: Find, Eq
 
-=======
->>>>>>> b1bf27ba7da56e186079f87fcaa17c0cd8e20b77
 // it('Using Get with Find and Eq', () => {
 //     cy.visit('https://amihome.by/catalog/upholstered/soft_corners/');
 //     cy.get('.bottom-header').find('ul').find('li').eq('2');
