@@ -89,48 +89,155 @@
 
 //18. Проверки: Should + And, Expect
 
-it('SHOULD', () => {
-    cy.visit('https://facebook.com/');
-    cy.get('#email')
-        .type('vit@gmail.test')
-        .should('have.value', 'vit@gmail.test')
-        .and('be.visible')
+// it('SHOULD', () => {
+//     cy.visit('https://facebook.com/');
+//     cy.get('#email')
+//         .type('vit@gmail.test')
+//         .should('have.value', 'vit@gmail.test')
+//         .and('be.visible')
+// })
+
+// it('EXPECT', () => {
+//     cy.visit('https://facebook.com/');
+//     cy.get('#email')
+//         .type('vit@gmail.test').then( input => {
+//             expect(input).to.have.value('vit@gmail.test')
+//         })
+// })
+
+// it('Check checkbox condition', () => {
+//     cy.visit('https://myfin.by/kredity/potrebitelskie?CreditsListPotrebitelskieForm%5Bamount%5D=20000&CreditsListPotrebitelskieForm%5Bperiod%5D=60');
+//     cy.get('#check_v2_consent')
+//         .should('be.checked')
+//         .should('not.be.disabled')
+// })
+
+// it('Check contains element - draft', () => {
+//     cy.visit('https://catalog.onliner.by/');
+//     cy.contains('Бытовая техника')
+//         .click()
+//         .contains('.catalog-navigation-list__aside-item_active > .catalog-navigation-list__aside-title')
+//         .trigger('mouseover')
+//         .get('.catalog-navigation-list__dropdown-list').find('a').eq('1')
+//         .should('be.visible')
+// })
+
+// it('Check is correct attr in submit', () => {
+//     cy.visit('https://facebook.com/');
+//     cy.contains('Вход')
+//         .should('have.attr', 'type')
+//         .and('match', /submit/)
+// })
+
+// it.only('Check is correct URL', () => {
+//     cy.visit('https://docs.cypress.io/');
+//     cy.url()
+//         .should('eq', 'https://docs.cypress.io/guides/overview/why-cypress')
+// })
+
+
+
+
+
+//19. Действия с WEB элементами
+
+it('Type', () => {
+    cy.visit('https://facebook.com/')
+        .get('#email')
+        .type('vit@test.test')
 })
 
-it('EXPECT', () => {
-    cy.visit('https://facebook.com/');
-    cy.get('#email')
-        .type('vit@gmail.test').then( input => {
-            expect(input).to.have.value('vit@gmail.test')
-        })
+it('Focus', () => {
+    cy.visit('https://facebook.com/')
+        .get('#email')
+        .focus()
 })
 
-it('Check checkbox condition', () => {
-    cy.visit('https://myfin.by/kredity/potrebitelskie?CreditsListPotrebitelskieForm%5Bamount%5D=20000&CreditsListPotrebitelskieForm%5Bperiod%5D=60');
-    cy.get('#check_v2_consent')
-        .should('be.checked')
-        .should('not.be.disabled')
+it('Blur', () => {
+    cy.visit('https://facebook.com/')
+        .get('#email')
+        .focus()
+        .blur()
 })
 
-it('Check contains element - draft', () => {
-    cy.visit('https://catalog.onliner.by/');
-    cy.contains('Бытовая техника')
+it('Clear', () => {
+    cy.visit('https://facebook.com/')
+        .get('#email')
+        .type('vit@test.test')
+        .wait(2000)
+        .clear()
+})
+
+it('Submit', () => {
+    cy.visit('https://facebook.com/')
+        .get('#email')
+        .type('vit@test.test')
+        .get('#pass')
+        .type('vit@test.test')
+        .get('[method="post"]')
+        .submit()
+})
+
+it('Click', () => {
+    cy.visit('https://facebook.com/')
+        .get('[data-testid="open-registration-form-button"]')
         .click()
-        .contains('.catalog-navigation-list__aside-item_active > .catalog-navigation-list__aside-title')
+})
+
+it('Right click', () => {
+    cy.visit('https://example.cypress.io/commands/actions')
+        .get('.rightclick-action-div')
+        .rightclick()
+})
+
+it('Double click', () => {
+    cy.visit('https://yari-demos.prod.mdn.mozit.cloud/en-US/docs/Web/API/Element/dblclick_event/_sample_.examples.html')
+        .get('aside')
+        .dblclick()
+})
+
+it('Check', () => {
+    cy.visit('https://ru.code-basics.com/languages/html/lessons/checkbox')
+        .get('input').eq('0')
+        .check()
+        .get('input').eq('1')
+        .check()
+})
+
+it('Uncheck', () => {
+    cy.visit('https://ru.code-basics.com/languages/html/lessons/checkbox')
+        .get('input').eq('3')
+        .check()
+        .wait(3000)
+        .get('input').eq('3')
+        .uncheck()
+})
+
+
+it('Select', () => {
+    cy.visit('https://ru.code-basics.com/languages/html/lessons/select')
+        .get('.form-select').eq('0')
+        .select('PHP')
+        .get('.form-select').eq('2')
+        .select(['Java','HTML'])
+})
+
+it('ScrollIntoView', () => {
+    cy.visit('https://ru.code-basics.com/languages/html/lessons/select')
+        .get('summary').eq('0')
+        .wait(2000)
+        .scrollIntoView()
+})
+
+it('ScrollTo', () => {
+    cy.visit('https://picabu.ru')
+        .wait(2000)
+    cy.scrollTo(0, 1200)
+})
+
+it.only('Trigger', () => {
+    cy.visit('https://picabu.ru')
+        .get('.header-menu__extra')
+        .wait(5000)
         .trigger('mouseover')
-        .get('.catalog-navigation-list__dropdown-list').find('a').eq('1')
-        .should('be.visible')
-})
-
-it('Check is correct attr in submit', () => {
-    cy.visit('https://facebook.com/');
-    cy.contains('Вход')
-        .should('have.attr', 'type')
-        .and('match', /submit/)
-})
-
-it.only('Check is correct URL', () => {
-    cy.visit('https://docs.cypress.io/');
-    cy.url()
-        .should('eq', 'https://docs.cypress.io/guides/overview/why-cypress')
 })
