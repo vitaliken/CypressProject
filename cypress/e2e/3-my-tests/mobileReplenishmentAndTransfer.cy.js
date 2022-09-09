@@ -3,6 +3,13 @@ import { mobileReplenishment } from "../../support/pages/mobileReplenishment";
 import { transfers } from "../../support/pages/transfers";
 import { basePage } from "../../support/pages/basePage";
 
+beforeEach('setup success response with stub', () => {
+    cy.intercept('https://next.privat24.ua/api/p24/pub/basket/confirm', 
+    {fixture: 'confirmResponse/success.json'});
+    cy.intercept('https://next.privat24.ua/api/p24/pub/archive', 
+    {fixture: 'archiveResponse/success.json'});
+})
+
 it("Replenishment of Ukrainian mobile phone number", () => {
     basePage.open('https://next.privat24.ua/mobile?lang=en')
     mobileReplenishment.typePhoneNumber('979442567')
@@ -15,6 +22,8 @@ it("Replenishment of Ukrainian mobile phone number", () => {
     mobileReplenishment.checkDebitAmount('1')
     mobileReplenishment.checkDebitAmountAndComission('2')
     mobileReplenishment.checkPaymentCurrency('UAH')
+    cy.contains('Pay')
+        .click()
 });
 
 it('Money transfer between foreign cards', () => {
@@ -32,4 +41,8 @@ it('Money transfer between foreign cards', () => {
     transfers.checkDebitComission('119.19 UAH')
     transfers.checkTotalCurrency('UAH')
     transfers.checkComment('My test comment')
+});
+
+it.only("Check state of payment in the archive | public session", () => {
+    basePage.open('https://next.privat24.ua/history/transactions?lang=en')
 });
