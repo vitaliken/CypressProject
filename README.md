@@ -2,8 +2,11 @@
 
 It's my test project on Automation testing with Cypress and JS
 
-####Install Cypress
+#### Install Cypress
 `$ npm install cypress --save-dev`
 
-####Run
+#### Run
 `$ npx cypress open`
+
+#### Request examples
+`https://jsonplaceholder.typicode.com/guide/`
